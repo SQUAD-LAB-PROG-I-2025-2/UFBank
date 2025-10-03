@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ufbank-service
+spec:
+  type: NodePort   # LoadBalancer não funciona no minikube sem addon
+  selector:
+    app: ufbank
+  ports:
+  - port: 80        # porta dentro do cluster
+    targetPort: 3000 # porta do container
+    nodePort: 30080 # porta exposta no minikube
