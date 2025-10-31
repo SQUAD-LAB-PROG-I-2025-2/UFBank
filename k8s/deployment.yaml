@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ufbank-deployment
+spec:
+  replicas: 1   # você pode aumentar para escalar
+  selector:
+    matchLabels:
+      app: ufbank
+  template:
+    metadata:
+      labels:
+        app: ufbank
+    spec:
+      containers:
+      - name: ufbank
+        image: ufbank:latest          # sua imagem local importada no minikube
+        imagePullPolicy: IfNotPresent # não tenta puxar do Docker Hub
+        ports:
+        - containerPort: 3000
